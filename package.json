@@ -1,0 +1,40 @@
+{
+  "name": "effects-gallery",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "bunx --bun astro dev --port 3000",
+    "start": "bunx --bun astro dev",
+    "build": "bunx --bun astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "prettier": "prettier --write . --plugin=prettier-plugin-astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^1.0.0",
+    "@astrojs/react": "^3.0.2",
+    "@astrojs/tailwind": "^5.0.0",
+    "@types/canvas-confetti": "^1.6.0",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
+    "astro": "^3.0.8",
+    "autoprefixer": "^10.4.15",
+    "canvas-confetti": "^1.6.0",
+    "framer-motion": "^10.16.4",
+    "locomotive-scroll": "5.0.0-beta.8",
+    "motion": "^10.16.2",
+    "postcss": "^8.4.28",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "split-type": "^0.3.3",
+    "tailwindcss": "^3.3.3"
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^6.5.0",
+    "eslint": "^8.48.0",
+    "eslint-plugin-astro": "^0.29.0",
+    "prettier": "^3.0.3",
+    "prettier-plugin-astro": "^0.12.0",
+    "prettier-plugin-tailwindcss": "^0.5.4"
+  }
+}

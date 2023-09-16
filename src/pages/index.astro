@@ -1,0 +1,47 @@
+---
+// Component Imports
+import Button from "../components/Button.astro";
+import MainLayout from "../layouts/main.astro";
+// Full Astro Component Syntax:
+// https://docs.astro.build/core-concepts/astro-components/
+const pages = [
+  {
+    title: "Grainy effect",
+    href: "/grainy",
+  },
+  {
+    title: "Locomotive scroll",
+    href: "/scroll",
+  },
+  {
+    title: "Curved menu",
+    href: "/curved-menu",
+  },
+  {
+    title: "Masked cursor",
+    href: "/masked-cursor",
+  },
+];
+---
+
+<MainLayout title="Effects Gallery">
+  <div
+    class="grid h-screen place-items-center content-center bg-neutral-900 text-neutral-100"
+  >
+    <section class="flex flex-1 flex-wrap gap-8">
+      {
+        pages.map((page) => (
+          <div class="flex flex-col items-center justify-center gap-2 rounded p-8 shadow dark:bg-neutral-700">
+            <h1>{page.title}</h1>
+            <a
+              href={page.href}
+              class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+            >
+              View
+            </a>
+          </div>
+        ))
+      }
+    </section>
+  </div>
+</MainLayout>

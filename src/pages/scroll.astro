@@ -1,0 +1,200 @@
+---
+import MainLayout from "../layouts/main.astro";
+
+const fadingTexts = [
+  "Lorem ipsum dolor sit amet",
+  "consectetur adipisicing elit.",
+  "Eveniet tempore voluptatem",
+  "Aut dolor est neque qui.",
+];
+---
+
+<style>
+  html {
+    overflow-x: hidden;
+  }
+  html.lenis {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
+  }
+</style>
+
+<MainLayout title="scroll">
+  <div
+    class="pointer-events-none fixed inset-0 z-0 bg-[url('/grainy.svg')] bg-cover bg-center bg-no-repeat"
+  >
+  </div>
+  <div class="relative h-screen w-full bg-red-500"></div>
+  <article class="relative">
+    <section
+      data-progress-area
+      data-scroll
+      id="scrollable-section"
+      class="z-10 min-h-screen w-screen"
+    >
+      {
+        fadingTexts.map((text, idx) => (
+          <div class="sticky top-0 flex min-h-screen w-full flex-1 flex-col items-center justify-center">
+            {idx === 0 && (
+              <div
+                class="gradient absolute left-0 right-0 mx-auto h-fit w-full bg-[radial-gradient(50%_50%_at_50%_50%,_var(--tw-gradient-stops))] from-white/10 to-transparent py-20 transition-opacity duration-1000 group-hover:opacity-0"
+                style="filter:blur(4px);"
+              />
+            )}
+            <p
+              style="opacity: 0; filter:blur(4px);"
+              class="text relative bg-[radial-gradient(50%_50%_at_50%_50%,_var(--tw-gradient-stops)),linear-gradient(to_right,_rgba(255,255,255,0.05),_transparent,_rgba(255,255,255,0.05))] from-white/20 to-transparent bg-clip-text text-center text-7xl text-transparent transition-all duration-500 ease-linear [font-kerning:none] [text-wrap:balance] md:text-9xl"
+            >
+              {text}
+            </p>
+          </div>
+        ))
+      }
+    </section>
+  </article>
+
+  <article>
+    <section class="relative h-screen w-full bg-blue-500"></section>
+  </article>
+</MainLayout>
+
+<script>
+  // @ts-ignore
+  import LocomotiveScroll from "locomotive-scroll";
+  import { animate, scroll } from "motion";
+
+  const locomotiveScroll = new LocomotiveScroll();
+
+  const target = document.querySelector(
+    "#scrollable-section",
+  ) as HTMLDivElement;
+
+  const texts = target.querySelectorAll(".text");
+  const gradient = target.querySelector(".gradient") as HTMLDivElement;
+
+  const normalizeBlur = (progress: number, start: number, end: number) => {
+    const normalizedProgress = Math.max(start, Math.min(end, progress));
+    // Calculate the normalized blur value using linear interpolation
+    const normalizedBlur =
+      4 - ((normalizedProgress - start) / (end - start)) * 4;
+
+    return normalizedBlur;
+  };
+
+  function applyBlur(
+    text: HTMLParagraphElement,
+    progress: number,
+    start: number,
+    end: number,
+  ) {
+    const normalizedBlur = normalizeBlur(progress, start, end);
+    text.style.filter = `blur(${normalizedBlur}px)`;
+  }
+
+  const handleTextBlur = (
+    text: HTMLParagraphElement,
+    progress: number,
+    idx: number,
+  ) => {
+    switch (idx) {
+      case 0: {
+        applyBlur(text, progress, 0, 0.2);
+        break;
+      }
+      case 1: {
+        applyBlur(text, progress, 0.2, 0.4);
+        break;
+      }
+      case 2: {
+        applyBlur(text, progress, 0.6, 0.75);
+        break;
+      }
+      case 3: {
+        applyBlur(text, progress, 0.9, 0.96);
+        break;
+      }
+    }
+  };
+
+  const textEffect = (
+    text: HTMLParagraphElement,
+    progress: number,
+    idx: number,
+  ) => {
+    text.style.willChange = "transform filter color";
+    if (text.style.opacity === "0") {
+      text.style.opacity = "1";
+    }
+    const textOpacity = Math.max(0, Math.min(1, progress * 4));
+    text.style.color = `rgba(255, 255, 255, ${textOpacity})`;
+    handleTextBlur(text, progress, idx);
+    text.style.transform = `translateY(calc(-${progress} * 20px))`;
+  };
+
+  const textEffectReset = (text: HTMLParagraphElement) => {
+    if (text.style.opacity === "0") return;
+    text.style.opacity = "0";
+    text.style.color = "transparent";
+    text.style.transform = "";
+    text.style.willChange = "filter";
+  };
+
+  scroll(animate(gradient, { opacity: 0 }), {
+    target,
+  });
+
+  texts.forEach((text, idx) => {
+    scroll(
+      ({ y }) => {
+        switch (idx) {
+          case 0: {
+            if (y.progress < 0.3) {
+              textEffect(text as HTMLParagraphElement, y.progress, idx);
+            } else {
+              textEffectReset(text as HTMLParagraphElement);
+            }
+            break;
+          }
+          case 1: {
+            if (y.progress < 0.6 && y.progress > 0.3) {
+              textEffect(text as HTMLParagraphElement, y.progress, idx);
+            } else {
+              textEffectReset(text as HTMLParagraphElement);
+            }
+            break;
+          }
+          case 2: {
+            if (y.progress < 0.92 && y.progress > 0.63) {
+              textEffect(text as HTMLParagraphElement, y.progress, idx);
+            } else {
+              textEffectReset(text as HTMLParagraphElement);
+            }
+            break;
+          }
+          case 3: {
+            if (y.progress > 0.92) {
+              textEffect(text as HTMLParagraphElement, y.progress, idx);
+            } else {
+              textEffectReset(text as HTMLParagraphElement);
+            }
+            break;
+          }
+        }
+      },
+      {
+        target: target,
+      },
+    );
+  });
+</script>

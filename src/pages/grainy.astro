@@ -1,0 +1,23 @@
+---
+import MainLayout from "../layouts/main.astro";
+---
+
+<MainLayout title="Grainy effect">
+  <section
+    class="z-10 h-screen w-screen bg-[url('/public/grainy.svg')] bg-cover bg-center bg-no-repeat"
+  >
+    <div class="flex h-full flex-1 flex-col items-center justify-center">
+      <div class="group relative">
+        <div
+          class="absolute inset-0 w-full bg-[radial-gradient(50%_50%_at_50%_50%,_var(--tw-gradient-stops))] from-white/10 to-transparent py-20 transition-opacity duration-1000 group-hover:opacity-0"
+        >
+        </div>
+        <p
+          class="relative bg-[radial-gradient(50%_50%_at_50%_50%,_var(--tw-gradient-stops)),linear-gradient(to_right,_rgba(255,255,255,0.05),_transparent,_rgba(255,255,255,0.05))] from-white/20 to-transparent bg-clip-text text-center text-7xl text-transparent transition-all duration-[1500ms] [text-wrap:balance] group-hover:text-white md:text-9xl"
+        >
+         Lorem ipsum dolor sit amet
+        </p>
+      </div>
+    </div>
+  </section>
+</MainLayout>
