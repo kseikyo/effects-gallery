@@ -4,8 +4,8 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "bunx --bun astro dev --port 3000",
-    "start": "bunx --bun astro dev",
-    "build": "bunx --bun astro build",
+    "start": "astro dev",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
     "prettier": "prettier --write . --plugin=prettier-plugin-astro"
