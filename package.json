@@ -11,30 +11,31 @@
     "prettier": "prettier --write . --plugin=prettier-plugin-astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^1.0.0",
-    "@astrojs/react": "^3.0.2",
-    "@astrojs/tailwind": "^5.0.0",
-    "@types/canvas-confetti": "^1.6.0",
-    "@types/react": "^18.0.21",
-    "@types/react-dom": "^18.0.6",
-    "astro": "^3.0.8",
-    "autoprefixer": "^10.4.15",
-    "canvas-confetti": "^1.6.0",
-    "framer-motion": "^10.16.4",
+    "@astrojs/mdx": "^1.1.5",
+    "@astrojs/react": "^3.6.2",
+    "@astrojs/tailwind": "^5.1.0",
+    "@types/canvas-confetti": "^1.6.4",
+    "@types/react": "^18.3.4",
+    "@types/react-dom": "^18.3.0",
+    "astro": "^3.6.5",
+    "autoprefixer": "^10.4.20",
+    "canvas-confetti": "^1.9.3",
+    "framer-motion": "^10.18.0",
     "locomotive-scroll": "5.0.0-beta.8",
-    "motion": "^10.16.2",
-    "postcss": "^8.4.28",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "split-type": "^0.3.3",
-    "tailwindcss": "^3.3.3"
+    "motion": "^10.18.0",
+    "postcss": "^8.4.41",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-use-measure": "^2.1.1",
+    "split-type": "^0.3.4",
+    "tailwindcss": "^3.4.10"
   },
   "devDependencies": {
-    "@typescript-eslint/parser": "^6.5.0",
-    "eslint": "^8.48.0",
-    "eslint-plugin-astro": "^0.29.0",
-    "prettier": "^3.0.3",
-    "prettier-plugin-astro": "^0.12.0",
-    "prettier-plugin-tailwindcss": "^0.5.4"
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-astro": "^0.29.1",
+    "prettier": "^3.3.3",
+    "prettier-plugin-astro": "^0.12.3",
+    "prettier-plugin-tailwindcss": "^0.5.14"
   }
 }
